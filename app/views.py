@@ -1,5 +1,6 @@
 from django.shortcuts import redirect
 from django.http import HttpResponse
+from django.shortcuts import get_object_or_404
 
 from django.contrib.auth.views import LoginView
 from django.urls import reverse_lazy
@@ -47,4 +48,5 @@ class UrlList(LoginRequiredMixin, ListView):
 
 
 def redirectUrl(request, shortUrl):
-    return HttpResponse(shortUrl)
+    newLink = get_object_or_404(Url, pk=shortUrl).longUrl
+    return redirect(newLink)

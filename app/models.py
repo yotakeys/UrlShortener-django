@@ -9,7 +9,7 @@ class Url(models.Model):
         User, on_delete=models.CASCADE, null=True, blank=True)
     title = models.CharField(max_length=200)
     longUrl = models.TextField(null=False, blank=False)
-    shortUrl = models.CharField(max_length=30)
+    shortUrl = models.CharField(max_length=30, primary_key=True)
     create = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
