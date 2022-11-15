@@ -1,4 +1,5 @@
 from django.shortcuts import redirect
+from django.http import HttpResponse
 
 from django.contrib.auth.views import LoginView
 from django.urls import reverse_lazy
@@ -36,10 +37,14 @@ class Register(FormView):
 
     def get(self, *args, **kwargs):
         if self.request.user.is_authenticated:
-            return redirect('tasks')
+            return redirect('url')
         return super(Register, self).get(*args, **kwargs)
 
 
 class UrlList(LoginRequiredMixin, ListView):
     model = Url
     template_name = 'url_list.html'
+
+
+def redirectUrl(request, shortUrl):
+    return HttpResponse(shortUrl)
