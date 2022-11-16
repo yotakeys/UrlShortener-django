@@ -10,7 +10,29 @@
         {% else %}
         <a href="{% url 'login' %}">login</a>
         {% endif %}
+
+        <h3 style="color:black;margin-top:5px">You Have {{count}} Url{{count|pluralize:"s"}} Shortened</h3>
     </div>
+</div>
+
+<div id="search-add-container">
+    <form method="GET" style="margin-top:0;display:flex;">
+        <input type="text" name="search" value="{{search_value}}" />
+        <input class="button" type="submit" value="Search" />
+    </form>
+    <a id="add-url" href="">&#x2b</a>
+</div>
+
+<div class="url-container">
+    {% for url in urls %}
+    <div class="url">
+        <div class="url-title">
+            <a href="">{{url.title}}</a>
+        </div>
+        <a class="delete-url" style="color:rgb(237, 85, 85)" href="">&#215</a>
+    </div>
+
+    {% endfor %}
 </div>
 
 {% endblock content %}

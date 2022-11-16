@@ -45,6 +45,19 @@ class Register(FormView):
 class UrlList(LoginRequiredMixin, ListView):
     model = Url
     template_name = 'url_list.html'
+    context_object_name = 'urls'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['urls'] = context['urls'].filter(user=self.request.user)
+        context['count'] = context['urls'].count()
+
+        search = self.request.GET.get('search')
+        if search:
+            context['urls'] = context['urls'].filter(
+                title__icontains=search)
+        context['search_value'] = search
+        return context
 
 
 def redirectUrl(request, shortUrl):
