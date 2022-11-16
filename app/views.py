@@ -7,7 +7,7 @@ from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.mixins import UserPassesTestMixin
 from django.contrib.auth.forms import UserCreationForm
-from django.views.generic.edit import FormView, UpdateView
+from django.views.generic.edit import FormView, UpdateView, DeleteView
 from django.views.generic.list import ListView
 
 from django.contrib.auth import login
@@ -71,6 +71,16 @@ class UpdateUrl(LoginRequiredMixin, UserPassesTestMixin, UpdateView, ListView):
     template_name = "url_update.html"
     success_url = reverse_lazy('url')
     context_object_name = "urls"
+
+    def test_func(self):
+        return str(self.request.user.get_username()) == str(self.get_object().user)
+
+
+class DeleteUrl(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = Url
+    context_object_name = 'url'
+    success_url = reverse_lazy('url')
+    template_name = 'url_delete.html'
 
     def test_func(self):
         return str(self.request.user.get_username()) == str(self.get_object().user)

@@ -29,7 +29,7 @@
         <div class="url-title">
             <a href="{% url 'urlUpdate' url.shortUrl %}">{{ request.META.HTTP_HOST }}/url/{{url.shortUrl}}</a>
         </div>
-        <a class="delete-url" style="color:rgb(237, 85, 85)" href="">&#215;</a>
+        <a class="delete-url" style="color:rgb(237, 85, 85)" href="{% url 'urlDelete' url.shortUrl %}">&#215;</a>
     </div>
 
     {% endfor %}
