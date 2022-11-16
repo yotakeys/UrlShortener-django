@@ -55,7 +55,7 @@ class UrlList(LoginRequiredMixin, ListView):
         search = self.request.GET.get('search')
         if search:
             context['urls'] = context['urls'].filter(
-                title__icontains=search)
+                shortUrl__icontains=search)
         context['search_value'] = search
         return context
 
