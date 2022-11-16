@@ -7,7 +7,7 @@ from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.mixins import UserPassesTestMixin
 from django.contrib.auth.forms import UserCreationForm
-from django.views.generic.edit import FormView
+from django.views.generic.edit import FormView, UpdateView
 from django.views.generic.list import ListView
 
 from django.contrib.auth import login
@@ -63,3 +63,14 @@ class UrlList(LoginRequiredMixin, ListView):
 def redirectUrl(request, shortUrl):
     newLink = get_object_or_404(Url, pk=shortUrl).longUrl
     return redirect(newLink)
+
+
+class UpdateUrl(LoginRequiredMixin, UserPassesTestMixin, UpdateView, ListView):
+    model = Url
+    fields = ['longUrl']
+    template_name = "url_update.html"
+    success_url = reverse_lazy('url')
+    context_object_name = "urls"
+
+    def test_func(self):
+        return str(self.request.user.get_username()) == str(self.get_object().user)
