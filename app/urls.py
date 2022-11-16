@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import Login, Register, UrlList, redirectUrl, UpdateUrl, DeleteUrl
+from .views import Login, Register, UrlList, redirectUrl, UpdateUrl, DeleteUrl, CreateUrl
 from django.contrib.auth.views import LogoutView
 
 urlpatterns = [
@@ -10,4 +10,5 @@ urlpatterns = [
     path('url/<str:shortUrl>/', name='urlRedirect', view=redirectUrl),
     path('update/<str:pk>/', name="urlUpdate", view=UpdateUrl.as_view()),
     path('delete/<str:pk>/', name="urlDelete", view=DeleteUrl.as_view()),
+    path('create/', name="urlCreate", view=CreateUrl.as_view()),
 ]

@@ -1,0 +1,18 @@
+{% extends "maintemplate.html" %}
+
+{% block content %}
+
+<div class="header">
+    <a href="{% url 'url' %}">&#8592; Back</a>
+</div>
+
+<div class="body">
+    <form method="POST" action="">
+        {% csrf_token %}
+        {{form.as_p}}
+        <input class="button" type="submit" value="Add">
+    </form>
+
+</div>
+
+{% endblock content %}
