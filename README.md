@@ -1,9 +1,10 @@
 # UrlShortener-Django
 URL Shortener Using Django, with login User function for personalization URLs
 
-Dont FOrget to do Migration
+Dont Forget to do Migration
 
 ```
+python manage.py collectstatic
 python manage.py makemigrations
 python manage.py migrate
 python manage.py runserver
